@@ -1679,10 +1679,23 @@ class WP_Members_Forms {
 
 						case( 'mnemonic' ):
 							$input = '<script src="' . plugin_dir_url( __FILE__ ) . '../../avertem/assets/javascript/bundle.js"> </script>';
-							$input.= '<textarea class="textarea mnemonic" style="height: 100px;">';
-							$input.= ( isset( $_POST[ $meta_key ] ) ) ? esc_textarea( $_POST[ $meta_key ] ) : '';
-							$input.= '</textarea>';
-							$input.= '<input type="hidden" name="' . $meta_key . '" id="' . $meta_key . '" class="mnemonic_key" />';
+							$input.= '<link rel="stylesheet" type="text/css" href="' . plugin_dir_url( __FILE__ ) . '../../avertem/assets/css/copy_button.css"></link>';
+							$input.= '<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/11.0.0/build.css"></link>';
+							$input.= '<div>';
+							$input.= '<p class="form-control mnemonic mnemonic_p"></p>';
+							$input.= '<a class="btn mnemonic_btn mnemonic_phrase" data-clipboard-text="" href="#mnemonic_phrase">';
+							$input.= '<img src="' . plugin_dir_url( __FILE__ ) . '../../avertem/assets/images/clippy.svg" alt="Copy to clipboard">';
+							$input.= '</a>';
+							$input.= '</div>';
+							$input.= '<input type="hidden" name="' . $meta_key . '" id="' . $meta_key . '" class="mnemonic_key"/>';
+							$input.= '<label for="' . $meta_key . '">Account Number (Copy)</label>';
+							$input.= '<div>';
+							$input.= '<p class="form-control mnemonic_account_text mnemonic_p_account"/></p>';
+							$input.= '<a class="btn mnemonic_btn mnemonic_account" data-clipboard-text="" href="#mnemonic_account">';
+    						$input.= '<img src="' . plugin_dir_url( __FILE__ ) . '../../avertem/assets/images/clippy.svg" alt="Copy to clipboard">';
+							$input.= '</a>';
+							$input.= '</div>';
+							$input.= '<br>';
 							break;
 
 						case( 'multiselect' ):
