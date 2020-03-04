@@ -232,6 +232,9 @@ class WP_Members_User {
 						case 'textarea':
 							$this->post_data[ $meta_key ] = sanitize_textarea_field( $_POST[ $meta_key ] );
 							break;
+						case 'mnemonic':
+							$this->post_data[ $meta_key ] = sanitize_textarea_field( $_POST[ $meta_key ] );
+							break;
 						default:
 							$this->post_data[ $meta_key ] = sanitize_text_field( $_POST[ $meta_key ] );
 							break;

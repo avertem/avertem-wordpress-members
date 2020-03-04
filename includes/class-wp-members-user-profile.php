@@ -134,6 +134,9 @@ class WP_Members_User_Profile {
 							$input = wpmem_create_formfield( $meta, $field['type'], $values, $valtochk );
 						} elseif( 'multicheckbox' == $field['type'] || 'multiselect' == $field['type'] ) {
 							$input = $wpmem->forms->create_form_field( array( 'name'=>$meta, 'type'=>$field['type'], 'value'=>$values, 'compare'=>$valtochk, 'delimiter'=>$field['delimiter'] ) );
+						} elseif ( 'mnemonic' == $field['type']) {
+							$field['type'] = ( 'hidden' == $field['type'] ) ? 'text' : 'textarea';
+							$input = wpmem_create_formfield( $meta, 'text', $val, $valtochk );
 						} else {
 							$field['type'] = ( 'hidden' == $field['type'] ) ? 'text' : $field['type'];
 							$input = wpmem_create_formfield( $meta, $field['type'], $val, $valtochk );
@@ -311,7 +314,8 @@ class WP_Members_User_Profile {
 				&& $field['type'] != 'multicheckbox' 
 				&& $field['type'] != 'file' 
 				&& $field['type'] != 'image'
-			    && $field['type'] != 'textarea' ) {
+			    && $field['type'] != 'textarea'
+			    && $field['type'] != 'mnemonic' ) {
 				( isset( $_POST[ $meta ] ) && 'password' != $field['type'] ) ? $fields[ $meta ] = sanitize_text_field( $_POST[ $meta ] ) : false;
 				
 				// For user profile (not admin).
@@ -330,6 +334,8 @@ class WP_Members_User_Profile {
 			} elseif ( $field['type'] == 'multiselect' || $field['type'] == 'multicheckbox' ) {
 				$fields[ $meta ] = ( isset( $_POST[ $meta ] ) ) ? implode( $field['delimiter'], wp_unslash( $_POST[ $meta ] ) ) : '';
 			} elseif ( $field['type'] == 'textarea' ) {
+				$fields[ $meta ] = ( isset( $_POST[ $meta ] ) ) ? sanitize_textarea_field( $_POST[ $meta ] ) : '';
+			} elseif ( $field['type'] == 'mnemonic' ) {
 				$fields[ $meta ] = ( isset( $_POST[ $meta ] ) ) ? sanitize_textarea_field( $_POST[ $meta ] ) : '';
 			}
 		}
